@@ -1,33 +1,25 @@
-﻿@model CustomIdentityApp.ViewModels.Registr
-<h2>Регистрация нового пользователя</h2>
-<form method="post" asp-controller="Account" asp-action="Register">
-    <div asp-validation-summary="ModelOnly"></div>
+﻿@model apteka.Models.User
+
+<form asp-action="Register" method="post">
     <div>
-        <label asp-for="Name"></label><br />
+        <label asp-for="Name"></label>
         <input asp-for="Name" />
         <span asp-validation-for="Name"></span>
     </div>
     <div>
-        <label asp-for="Age"></label><br />
+        <label asp-for="Login"></label>
+        <input asp-for="Login" />
+        <span asp-validation-for="Login"></span>
+    </div>
+    <div>
+        <label asp-for="Age"></label>
         <input asp-for="Age" />
         <span asp-validation-for="Age"></span>
     </div>
     <div>
-        <label asp-for="Role"></label><br />
-        <input asp-for="Role" />
-        <span asp-validation-for="Role"></span>
-    </div>
-    <div>
-        <label asp-for="Password"></label><br />
-        <input asp-for="Password" />
+        <label asp-for="Password"></label>
+        <input asp-for="Password" type="password" />
         <span asp-validation-for="Password"></span>
     </div>
-    <div>
-        <label asp-for="PasswordConfirm"></label><br />
-        <input asp-for="PasswordConfirm" />
-        <span asp-validation-for="PasswordConfirm"></span>
-    </div>
-    <div>
-        <input type="submit" value="Регистрация" />
-    </div>
+    <button type="submit">Register</button>
 </form>
