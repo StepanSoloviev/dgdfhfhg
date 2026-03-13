@@ -1,6 +1,6 @@
 ﻿@model CustomIdentityApp.ViewModels.Registr
 <h2>Регистрация нового пользователя</h2>
-<form method="post" asp-controller="Account" asp-action="Register">
+<form method="post" asp-controller="Account" asp-action="Registr">
     <div asp-validation-summary="ModelOnly"></div>
     <div>
         <label asp-for="Name"></label><br />
@@ -16,6 +16,11 @@
         <label asp-for="Role"></label><br />
         <input asp-for="Role" />
         <span asp-validation-for="Role"></span>
+    </div>
+    <div>
+        <label asp-for="Login"></label><br />
+        <input asp-for="Login" />
+        <span asp-validation-for="Login"></span>
     </div>
     <div>
         <label asp-for="Password"></label><br />
