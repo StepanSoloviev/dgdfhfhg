@@ -12,6 +12,8 @@ namespace apteka.Models
         public string? Name { get; set; }
         [Range(0, 120)]
         public int Age { get; set; }
+        public string? Password { get; set; }
+        [Range(0, 120)]
         public int IdRole { get; set; }
         [ForeignKey("IdRole")]
         public Role?  Role { get; set; }
