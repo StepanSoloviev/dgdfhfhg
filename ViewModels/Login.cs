@@ -6,16 +6,16 @@ namespace CustomIdentityApp.ViewModels
     {
         [Required]
         [Display(Name = "ФИО")]
-        public string FIO { get; set; }
+        public string? FIO { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Пароль")]
-        public string Password { get; set; }
+        public string? Password { get; set; }
 
         [Display(Name = "Запомнить?")]
         public bool RememberMe { get; set; }
 
-        public string ReturnUrl { get; set; }
+        public string? ReturnUrl { get; set; }
     }
 }
