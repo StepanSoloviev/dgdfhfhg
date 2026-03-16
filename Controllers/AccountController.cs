@@ -52,7 +52,7 @@ namespace CustomIdentityApp.Controllers
             {
                 // Здесь можно использовать куки или сессии для авторизации
                 HttpContext.Session.SetInt32("UserId", user.IdUser);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Leks");
             }
 
             ModelState.AddModelError("", "Неверный логин или пароль.");
