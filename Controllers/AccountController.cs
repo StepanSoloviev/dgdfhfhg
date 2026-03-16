@@ -17,8 +17,8 @@ namespace CustomIdentityApp.Controllers
                 _context = context;
             }
 
-            [HttpGet]
-            public IActionResult Register()
+     [HttpGet]
+     public IActionResult Register()
             {
                 return View();
             }
