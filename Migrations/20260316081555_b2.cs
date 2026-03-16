@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace apteka.Migrations
 {
     /// <inheritdoc />
-    public partial class q1 : Migration
+    public partial class b2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -71,7 +71,9 @@ namespace apteka.Migrations
                     IdUser = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Login = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Age = table.Column<int>(type: "int", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IdRole = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -92,14 +94,10 @@ namespace apteka.Migrations
                     IDL = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Naz = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    IDPr = table.Column<int>(type: "int", nullable: false),
-                    IDAk = table.Column<int>(type: "int", nullable: false),
-                    IDVZ = table.Column<int>(type: "int", nullable: false),
                     Qena = table.Column<int>(type: "int", nullable: false),
                     ProizIDPr = table.Column<int>(type: "int", nullable: true),
                     AkqiaIDAk = table.Column<int>(type: "int", nullable: true),
-                    VidZIDV = table.Column<int>(type: "int", nullable: true),
-                    LekIDL = table.Column<int>(type: "int", nullable: true)
+                    VidZIDV = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -109,11 +107,6 @@ namespace apteka.Migrations
                         column: x => x.AkqiaIDAk,
                         principalTable: "Akqias",
                         principalColumn: "IDAk");
-                    table.ForeignKey(
-                        name: "FK_Leks_Leks_LekIDL",
-                        column: x => x.LekIDL,
-                        principalTable: "Leks",
-                        principalColumn: "IDL");
                     table.ForeignKey(
                         name: "FK_Leks_Proizs_ProizIDPr",
                         column: x => x.ProizIDPr,
@@ -132,8 +125,7 @@ namespace apteka.Migrations
                 {
                     IDZ = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IDPo = table.Column<int>(type: "int", maxLength: 50, nullable: false),
-                    Data = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Data = table.Column<DateTime>(type: "datetime2", maxLength: 50, nullable: false),
                     UsersIdUser = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -152,21 +144,20 @@ namespace apteka.Migrations
                 {
                     IDZL = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IDZ = table.Column<int>(type: "int", nullable: false),
-                    IDL = table.Column<int>(type: "int", nullable: false),
-                    lekIDL = table.Column<int>(type: "int", nullable: true)
+                    ZakazIDZ = table.Column<int>(type: "int", nullable: false),
+                    LekIDL = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ZakLeks", x => x.IDZL);
                     table.ForeignKey(
-                        name: "FK_ZakLeks_Leks_lekIDL",
-                        column: x => x.lekIDL,
+                        name: "FK_ZakLeks_Leks_LekIDL",
+                        column: x => x.LekIDL,
                         principalTable: "Leks",
                         principalColumn: "IDL");
                     table.ForeignKey(
-                        name: "FK_ZakLeks_Zakazs_IDL",
-                        column: x => x.IDL,
+                        name: "FK_ZakLeks_Zakazs_ZakazIDZ",
+                        column: x => x.ZakazIDZ,
                         principalTable: "Zakazs",
                         principalColumn: "IDZ",
                         onDelete: ReferentialAction.Cascade);
@@ -176,11 +167,6 @@ namespace apteka.Migrations
                 name: "IX_Leks_AkqiaIDAk",
                 table: "Leks",
                 column: "AkqiaIDAk");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Leks_LekIDL",
-                table: "Leks",
-                column: "LekIDL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Leks_ProizIDPr",
@@ -203,14 +189,14 @@ namespace apteka.Migrations
                 column: "UsersIdUser");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ZakLeks_IDL",
+                name: "IX_ZakLeks_LekIDL",
                 table: "ZakLeks",
-                column: "IDL");
+                column: "LekIDL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ZakLeks_lekIDL",
+                name: "IX_ZakLeks_ZakazIDZ",
                 table: "ZakLeks",
-                column: "lekIDL");
+                column: "ZakazIDZ");
         }
 
         /// <inheritdoc />

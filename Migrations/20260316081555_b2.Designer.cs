@@ -12,8 +12,8 @@ using apteka.Data;
 namespace apteka.Migrations
 {
     [DbContext(typeof(ApplicationDbContext2))]
-    [Migration("20260311103657_v2")]
-    partial class v2
+    [Migration("20260316081555_b2")]
+    partial class b2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -132,10 +132,18 @@ namespace apteka.Migrations
                     b.Property<int>("IdRole")
                         .HasColumnType("int");
 
+                    b.Property<string>("Login")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdUser");
 
@@ -170,17 +178,17 @@ namespace apteka.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IDZL"));
 
-                    b.Property<int?>("lekIDL")
+                    b.Property<int?>("LekIDL")
                         .HasColumnType("int");
 
-                    b.Property<int>("zakazIDZ")
+                    b.Property<int>("ZakazIDZ")
                         .HasColumnType("int");
 
                     b.HasKey("IDZL");
 
-                    b.HasIndex("lekIDL");
+                    b.HasIndex("LekIDL");
 
-                    b.HasIndex("zakazIDZ");
+                    b.HasIndex("ZakazIDZ");
 
                     b.ToTable("ZakLeks");
                 });
@@ -241,19 +249,19 @@ namespace apteka.Migrations
 
             modelBuilder.Entity("apteka.Models.ZakLek", b =>
                 {
-                    b.HasOne("apteka.Models.Lek", "lek")
+                    b.HasOne("apteka.Models.Lek", "Lek")
                         .WithMany("ZakLeks")
-                        .HasForeignKey("lekIDL");
+                        .HasForeignKey("LekIDL");
 
-                    b.HasOne("apteka.Models.Zakaz", "zakaz")
+                    b.HasOne("apteka.Models.Zakaz", "Zakaz")
                         .WithMany("ZakLeks")
-                        .HasForeignKey("zakazIDZ")
+                        .HasForeignKey("ZakazIDZ")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("lek");
+                    b.Navigation("Lek");
 
-                    b.Navigation("zakaz");
+                    b.Navigation("Zakaz");
                 });
 
             modelBuilder.Entity("apteka.Models.Zakaz", b =>
