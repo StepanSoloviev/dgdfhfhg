@@ -10,26 +10,29 @@ namespace CustomIdentityApp.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly ApplicationDbContext2 _context;
-        public AccountController(ApplicationDbContext2 context)
-        { 
-            _context = context;
-        }
 
-        [HttpGet]
-        public IActionResult Register()
-        {
-            return View();
-        }
+            private readonly ApplicationDbContext2 _context;
+
+            public AccountController(ApplicationDbContext2 context)
+            {
+                _context = context;
+            }
+
+     [HttpGet]
+     public IActionResult Register()
+            {
+                return View();
+            }
+
         [HttpPost]
         public IActionResult Register(User user)
         {
             if (ModelState.IsValid)
             {
-                user.IdRole = 2;
+                user.IdRole = 2;  // Назначение роли 2
                 _context.Users.Add(user);
                 _context.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Login");
             }
             return View(user);
         }
@@ -38,17 +41,24 @@ namespace CustomIdentityApp.Controllers
         {
             return View();
         }
+
         [HttpPost]
-        public IActionResult Login(User user)
+        public IActionResult Login(string login, string password)
         {
-            if (ModelState.IsValid)
+            var user = _context.Users
+                .FirstOrDefault(u => u.Login == login && u.Password == password);
+
+            if (user != null)
             {
-                user.IdRole = 2;
-                _context.Users.Add(user);
-                _context.SaveChanges();
-                return RedirectToAction("Index");
+                // Здесь можно использовать куки или сессии для авторизации
+                HttpContext.Session.SetInt32("UserId", user.IdUser);
+                return RedirectToAction("Index", "Home");
             }
-            return View(user);
+
+            ModelState.AddModelError("", "Неверный логин или пароль.");
+            return View();
         }
+
+
     }
 }

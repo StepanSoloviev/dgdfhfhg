@@ -1,16 +1,11 @@
-﻿@model CustomIdentityApp.ViewModels.LoginViewModel
-
-<h2>Вход в приложение</h2>
-<form method="post" asp-controller="Account" asp-action="Login"
-      asp-route-returnUrl="@Model.ReturnUrl">
-
-  <div>
-      <lebel>Логин</lebel>
-      <input type="text" name="login"/> 
-  </div>
+﻿<form asp-action="Login" method="post">
     <div>
-        <lebel>Пароль</lebel>
-        <input type="text" name="password" />
+        <label>Логин</label>
+        <input type="text" name="login" />
+    </div>
+    <div>
+        <label>Пароль</label>
+        <input type="password" name="password" />
     </div>
     <button type="submit">Войти</button>
 </form>
