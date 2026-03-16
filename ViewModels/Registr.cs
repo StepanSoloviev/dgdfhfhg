@@ -20,6 +20,7 @@ namespace CustomIdentityApp.ViewModels
         [Display(Name = "Пароль")]
         public string? Password { get; set; }
 
+
         [Required]
         [Compare("Password", ErrorMessage = "Пароли не совпадают")]
         [DataType(DataType.Password)]
